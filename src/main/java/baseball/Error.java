@@ -8,13 +8,15 @@ abstract class Err {
 }
 
 class NumError extends Err{
+    static final int ballLength = 3;
+    static final String ballPattern = "[1-9]+";
     @Override
     public boolean err(String s){
         Set<String> numset = new HashSet<>();
         numset.add(String.valueOf(s.charAt(0)));
         numset.add(String.valueOf(s.charAt(1)));
         numset.add(String.valueOf(s.charAt(2)));
-        if (s.length() != 3 || !s.matches("[1-9]+") || numset.size() != 3) {
+        if (s.length() != this.ballLength || !s.matches(this.ballPattern) || numset.size() != this.ballLength) {
             throw new IllegalArgumentException("잘못된 입력입니다.");
         }
         return false;
@@ -22,9 +24,10 @@ class NumError extends Err{
 }
 
 class EndError extends Err{
+    static final String endPattern = "[12]";
     @Override
     public boolean err(String s){
-        if (!s.matches("[12]")) {
+        if (!s.matches(this.endPattern)) {
             throw new IllegalArgumentException("잘못된 입력입니다.");
         }
         return false;
