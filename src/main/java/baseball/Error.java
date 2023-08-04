@@ -12,11 +12,14 @@ class NumError extends Err{
     static final String ballPattern = "[1-9]+";
     @Override
     public boolean err(String s){
+        if (s.length() != this.ballLength || !s.matches(this.ballPattern)) {
+            throw new IllegalArgumentException("잘못된 입력입니다.");
+        }
         Set<String> numset = new HashSet<>();
         numset.add(String.valueOf(s.charAt(0)));
         numset.add(String.valueOf(s.charAt(1)));
         numset.add(String.valueOf(s.charAt(2)));
-        if (s.length() != this.ballLength || !s.matches(this.ballPattern) || numset.size() != this.ballLength) {
+        if (numset.size() != this.ballLength) {
             throw new IllegalArgumentException("잘못된 입력입니다.");
         }
         return false;
